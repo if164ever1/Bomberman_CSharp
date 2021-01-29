@@ -36,9 +36,9 @@ namespace BomberMan
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.aboutGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.panelGame = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -68,18 +68,18 @@ namespace BomberMan
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.newGameToolStripMenuItem.Text = "New game";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(128, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // helpToolStripMenuItem
@@ -92,24 +92,25 @@ namespace BomberMan
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
-            // 
             // aboutGameToolStripMenuItem
             // 
             this.aboutGameToolStripMenuItem.Name = "aboutGameToolStripMenuItem";
-            this.aboutGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutGameToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.aboutGameToolStripMenuItem.Text = "About game";
             this.aboutGameToolStripMenuItem.Click += new System.EventHandler(this.aboutGameToolStripMenuItem_Click);
             // 
             // aboutAutorToolStripMenuItem
             // 
             this.aboutAutorToolStripMenuItem.Name = "aboutAutorToolStripMenuItem";
-            this.aboutAutorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutAutorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.aboutAutorToolStripMenuItem.Text = "About autor";
             this.aboutAutorToolStripMenuItem.Click += new System.EventHandler(this.aboutAutorToolStripMenuItem_Click);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
             // 
             // panelGame
             // 
@@ -147,6 +148,7 @@ namespace BomberMan
             this.Name = "labelScore";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BomberMan";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.labelScore_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

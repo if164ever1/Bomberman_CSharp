@@ -12,6 +12,7 @@ namespace BomberMan
 {
     public partial class labelScore : Form
     {
+        MainBoard board;
         public labelScore()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace BomberMan
 
         private void Init()
         {
-            MainBoard board = new MainBoard(panelGame);
+            board = new MainBoard(panelGame);
         }
 
         private void aboutGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,6 +32,17 @@ namespace BomberMan
         private void aboutAutorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Ihor Zadorozhniak");
+        }
+
+       private void labelScore_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left: board.MovePlayer(Arrows.left);break;
+                case Keys.Right: board.MovePlayer(Arrows.right); break;
+                case Keys.Up: board.MovePlayer(Arrows.up); break;
+                case Keys.Down: board.MovePlayer(Arrows.down); break;
+            }
         }
     }
 }
