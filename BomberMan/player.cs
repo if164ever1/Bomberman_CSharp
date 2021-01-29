@@ -13,12 +13,14 @@ namespace BomberMan
     {
         PictureBox player;
         PictureBox[,] mapPic;
+        Sost[,] map;
         int step;
 
-        public Player(PictureBox _player, PictureBox[,] _mapPic)
+        public Player(PictureBox _player, PictureBox[,] _mapPic, Sost[,]_map)
         {
             player = _player;
             mapPic = _mapPic;
+            map = _map;
             step = 3;
         }
         public void MovePlayer(Arrows arrows)
@@ -43,8 +45,45 @@ namespace BomberMan
         }
         private void Move(int sx, int sy)
         {
-            player.Location = new Point(player.Location.X + sx, player.Location.Y + sy);
+            if(IsEmpty(ref sx,ref sy))
+                player.Location = new Point(player.Location.X + sx, player.Location.Y + sy);
         }
+
+        private bool IsEmpty(ref int sx, ref int sy)
+        {
+            Point playerPoint = MyNowPoint();
+
+            if (sx > 0 && map[playerPoint.X + 1, playerPoint.Y] == Sost.empty)
+                return true;
+            if (sx < 0 && map[playerPoint.X - 1, playerPoint.Y] == Sost.empty)
+                return true;
+            if (sy > 0 && map[playerPoint.X, playerPoint.Y+1] == Sost.empty)
+                return true;
+            if (sy < 0 && map[playerPoint.X, playerPoint.Y-1] == Sost.empty)
+                return true;
+
+            int playerRight = player.Location.X + player.Size.Width;
+            int playerLeft = player.Location.X;
+            int playerDown = player.Location.Y + player.Size.Height;
+            int playerUp = player.Location.Y;
+
+            int rightWallLeft = mapPic[playerPoint.X + 1, playerPoint.Y].Location.X;
+            int leftWallRight = mapPic[playerPoint.X - 1, playerPoint.Y].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y].Size.Width;
+            int downWallUp = mapPic[playerPoint.X, playerPoint.Y + 1].Location.Y;
+            int upWallDown = mapPic[playerPoint.X, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X, playerPoint.Y - 1].Size.Height;
+
+            if (sx > 0 && playerRight + sx > rightWallLeft)
+                sx = rightWallLeft - playerRight;
+            if(sx<0 && playerLeft + sx < leftWallRight)
+                sx = leftWallRight - playerLeft;
+            if (sy > 0 && playerDown + sy > downWallUp)
+                sy = downWallUp - playerDown;
+            if (sy < 0 && playerUp + sy < upWallDown)
+                sy = upWallDown - playerUp;
+
+            return true;
+        }
+
 
         private Point MyNowPoint()
         {

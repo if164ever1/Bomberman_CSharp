@@ -122,7 +122,7 @@ namespace BomberMan
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
             panelGame.Controls.Add(picture);
             picture.BringToFront();
-            player = new Player(picture, mapPic);
+            player = new Player(picture, mapPic, map);
         }
 
         public void MovePlayer(Arrows arrow)
