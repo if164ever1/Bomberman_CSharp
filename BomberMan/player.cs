@@ -53,15 +53,6 @@ namespace BomberMan
         {
             Point playerPoint = MyNowPoint();
 
-            if (sx > 0 && map[playerPoint.X + 1, playerPoint.Y] == Sost.empty)
-                return true;
-            if (sx < 0 && map[playerPoint.X - 1, playerPoint.Y] == Sost.empty)
-                return true;
-            if (sy > 0 && map[playerPoint.X, playerPoint.Y+1] == Sost.empty)
-                return true;
-            if (sy < 0 && map[playerPoint.X, playerPoint.Y-1] == Sost.empty)
-                return true;
-
             int playerRight = player.Location.X + player.Size.Width;
             int playerLeft = player.Location.X;
             int playerDown = player.Location.Y + player.Size.Height;
@@ -72,6 +63,55 @@ namespace BomberMan
             int downWallUp = mapPic[playerPoint.X, playerPoint.Y + 1].Location.Y;
             int upWallDown = mapPic[playerPoint.X, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X, playerPoint.Y - 1].Size.Height;
 
+            //detect a position for diagonal
+            int rightUpWallDown = mapPic[playerPoint.X + 1, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X + 1, playerPoint.Y - 1].Size.Height;   // up and right wall
+            int rightDownWallUp = mapPic[playerPoint.X+1, playerPoint.Y+1].Location.Y;                                                                  // down and right wall
+            int leftUpWallDown =  mapPic[playerPoint.X - 1, playerPoint.Y-1].Location.Y + mapPic[playerPoint.X - 1, playerPoint.Y - 1].Size.Height;                                                               // left up 
+            int leftDownWallUp = mapPic[playerPoint.X - 1, playerPoint.Y + 1].Location.Y;
+
+            int rightUpWallLeft = mapPic[playerPoint.X + 1, playerPoint.Y - 1].Location.X;
+            int leftUpWallRight = mapPic[playerPoint.X - 1, playerPoint.Y - 1].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y - 1].Size.Width;
+            int rightDownWallLeft = mapPic[playerPoint.X + 1, playerPoint.Y + 1].Location.X;
+            int leftDownWallRight = mapPic[playerPoint.X - 1, playerPoint.Y + 1].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y + 1].Size.Width;
+
+            if (sx > 0 && map[playerPoint.X + 1, playerPoint.Y] == Sost.empty)
+            {
+                if (playerUp < rightUpWallDown)
+                    sy = rightUpWallDown - playerUp;
+                if (playerDown > rightDownWallUp)
+                    sy = rightDownWallUp - playerDown;
+                return true;
+            }
+
+            if (sx < 0 && map[playerPoint.X - 1, playerPoint.Y] == Sost.empty)
+            {
+                if (playerUp < leftUpWallDown)
+                    sy = leftUpWallDown - playerUp;
+                if (playerDown > leftDownWallUp)
+                    sy = leftDownWallUp - playerDown;
+                return true;
+            }
+
+            if (sy > 0 && map[playerPoint.X, playerPoint.Y + 1] == Sost.empty)
+            {
+                if (playerRight > rightDownWallLeft)
+                    sx = rightDownWallLeft - playerRight;
+                if (playerLeft < leftDownWallRight)
+                    sx = leftDownWallRight - playerLeft;
+                return true;
+            }
+
+            if (sy < 0 && map[playerPoint.X, playerPoint.Y - 1] == Sost.empty)
+            {
+                if (playerRight > rightUpWallLeft)
+                    sx = rightUpWallLeft - playerRight;
+                if (playerLeft < leftUpWallRight)
+                    sx = leftUpWallRight - playerLeft;
+                return true;
+            }
+            
+
+   
             if (sx > 0 && playerRight + sx > rightWallLeft)
                 sx = rightWallLeft - playerRight;
             if(sx<0 && playerLeft + sx < leftWallRight)
